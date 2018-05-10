@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.casca.lab05.Activity.Payment">
+
+    <LinearLayout
+        android:layout_width="368dp"
+        android:layout_height="495dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="3dp"
+        tools:ignore="MissingConstraints">
+        <LinearLayout
+            android:layout_width="368dp"
+            android:layout_height="39dp"
+            android:orientation="horizontal"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="16dp">
+
+            <RadioGroup
+                android:id="@+id/rdgGrupo"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkedButton="@+id/rdbOne"
+                android:layout_column="0"
+                android:layout_span="3">
+                <RadioButton
+                    android:id="@+id/rdbOne"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""/>
+
+                <ImageButton
+                    android:id="@+id/imageButton4"
+                    android:layout_width="45dp"
+                    android:layout_height="40dp"
+                    app:srcCompat="@mipmap/master"
+                    tools:layout_editor_absoluteX="48dp"
+                    tools:layout_editor_absoluteY="16dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton5"
+                    android:layout_width="45dp"
+                    android:layout_height="40dp"
+                    app:srcCompat="@mipmap/visa"
+                    tools:layout_editor_absoluteX="93dp"
+                    tools:layout_editor_absoluteY="16dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton6"
+                    android:layout_width="45dp"
+                    android:layout_height="40dp"
+                    app:srcCompat="@mipmap/amex"
+                    tools:layout_editor_absoluteX="139dp"
+                    tools:layout_editor_absoluteY="16dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton7"
+                    android:layout_width="45dp"
+                    android:layout_height="40dp"
+                    app:srcCompat="@mipmap/discover"
+                    tools:layout_editor_absoluteX="183dp"
+                    tools:layout_editor_absoluteY="16dp" />
+
+                <RadioButton
+                    android:id="@+id/radioButton6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:layout_editor_absoluteX="255dp"
+                    tools:layout_editor_absoluteY="16dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton8"
+                    android:layout_width="45dp"
+                    android:layout_height="40dp"
+                    app:srcCompat="@mipmap/paypal"
+                    tools:layout_editor_absoluteX="287dp"
+                    tools:layout_editor_absoluteY="16dp" />
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="368dp"
+            android:layout_height="266dp"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="122dp">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Name (as it appears on your card)" />
+
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Card number (no dashes or spaces)" />
+
+            <EditText
+                android:id="@+id/editText3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName|number" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Expiration date" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="43dp"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/mes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:entries="@array/spinner_month"/>
+
+                <Spinner
+                    android:id="@+id/anio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:entries="@array/spinner_year"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Security code (3 on back, Amex: 4 on front)" />
+            <LinearLayout
+                android:layout_width="368dp"
+                android:layout_height="39dp"
+                android:orientation="horizontal"
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="16dp">
+
+                <EditText
+                    android:id="@+id/security"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="textPersonName|number" />
+
+                <ImageButton
+                    android:id="@+id/imageButton9"
+                    android:layout_width="45dp"
+                    android:layout_height="40dp"
+                    app:srcCompat="@mipmap/security3"
+                    tools:layout_editor_absoluteX="93dp"
+                    tools:layout_editor_absoluteY="16dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton10"
+                    android:layout_width="45dp"
+                    android:layout_height="40dp"
+                    app:srcCompat="@mipmap/security4"
+                    tools:layout_editor_absoluteX="139dp"
+                    tools:layout_editor_absoluteY="16dp" />
+
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textViewTotalP"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Total:"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/textViewMontoP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="0"
+                android:textColor="@android:color/black"
+                android:textSize="24sp" />
+
+            <Button
+                android:id="@+id/finalizar_compra"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="23dp"
+                android:layout_marginRight="23dp"
+                android:background="@android:color/holo_orange_light"
+                android:text="Finalizar Compra"
+                android:textColor="@color/comprar" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
+
