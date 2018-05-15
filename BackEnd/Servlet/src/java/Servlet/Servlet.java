@@ -18,7 +18,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import AccesoDatos.ServicioProducto;
+import AccesoDatos.ServicioUsuario;
 import LogicaNegocio.Product;
+import LogicaNegocio.Usuario;
 
 /**
  *
@@ -48,16 +50,57 @@ public class Servlet extends HttpServlet {
            
             //Se crea el objeto
             Product p = new Product();
+            Usuario u = new Usuario();
             
             ServicioProducto sp = new ServicioProducto();
+            ServicioUsuario su = new ServicioUsuario();
             
             Thread.sleep(500);
             
             String accion = request.getParameter("accion");
             List<Double> listaCalculo = new ArrayList();
             switch (accion) {
-                                    
-                case "agregar":
+                case "agregarUsuario":
+                          /*p.setCodigo(request.getParameter("codigo"));
+                          p.setNombreProducto(request.getParameter("nombre"));
+                          p.setPrecio(Double.parseDouble(request.getParameter("precio")));
+                          p.setImportado(Integer.parseInt(request.getParameter("importado")));
+                          p.setTipo(request.getParameter("tipo")); */
+                          
+                          su.insertarUsuario(u);
+
+                          out.print("C~El objeto fue ingresado correctamente");
+                          break;
+
+                case "setUsuario":
+                        /*p.setCodigo(request.getParameter("codigo"));
+                        p.setNombreProducto(request.getParameter("nombre"));
+                        p.setPrecio(Double.parseDouble(request.getParameter("precio")));
+                        p.setImportado(Integer.parseInt(request.getParameter("importado")));
+                        p.setTipo(request.getParameter("tipo")); */
+
+                        su.actualizarUsuario(u);
+
+                        out.print("C~El objeto fue actualizado correctamente");
+                        break;
+
+                case "consultarUsuario":
+
+                    List<Product> list = new ArrayList(su.listarUsuario());
+                    json = new Gson().toJson(list);   
+                    json2 = new Gson().toJson(listaCalculo);  
+                    out.print(json);
+                    break;
+
+                case "deleteUsuario":
+                    String prod = request.getParameter("nombre");
+                    su.eliminarUsuario(prod);
+                    out.print("C~El objeto fue eliminado correctamente");
+                    break;      
+                    
+                /* --------------------------------------------------------------------------------------- */
+                    
+                case "agregarProducto":
                           /*p.setCodigo(request.getParameter("codigo"));
                           p.setNombreProducto(request.getParameter("nombre"));
                           p.setPrecio(Double.parseDouble(request.getParameter("precio")));
@@ -69,7 +112,7 @@ public class Servlet extends HttpServlet {
                           out.print("C~El objeto fue ingresado correctamente");
                           break;
 
-                case "set":
+                case "setProducto":
                         /*p.setCodigo(request.getParameter("codigo"));
                         p.setNombreProducto(request.getParameter("nombre"));
                         p.setPrecio(Double.parseDouble(request.getParameter("precio")));
@@ -94,7 +137,7 @@ public class Servlet extends HttpServlet {
                     out.print(json);
                     break;
 
-                case "delete":
+                case "deleteProducto":
                     int prod = Integer.parseInt(request.getParameter("nombre"));
                     sp.eliminarProducto(prod);
                     out.print("C~El objeto fue eliminado correctamente");

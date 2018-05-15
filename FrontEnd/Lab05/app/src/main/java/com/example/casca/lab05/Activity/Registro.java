@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.casca.lab05.ConnectionHelper.JsonConnection;
 import com.example.casca.lab05.Model.Usuario;
 import com.example.casca.lab05.R;
 import com.example.casca.lab05.Utils.Data;
@@ -105,6 +106,12 @@ public class Registro extends AppCompatActivity {
             // perform the user login attempt.
             Usuario us = new Usuario(nom, mail, usu, passw, 1);
             Data.listaUsuarios.add(us);
+
+            JsonConnection conexion=new JsonConnection();
+            conexion.execute(new String[]{Data.url,"POST"});
+
+
+
             Toast.makeText(getApplicationContext(), "Registro exitoso", Toast.LENGTH_SHORT).show();
 
             Intent intentf = new Intent(Registro.this,Navigation.class);

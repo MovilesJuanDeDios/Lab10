@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Data {
-
+    public static String url="http://10.0.2.2:8080/Servlet/Servlet?accion=";
     public static final List<Usuario> listaUsuarios = new ArrayList<>();
     public static final List<Product> listaProductos = new ArrayList<>();
 
