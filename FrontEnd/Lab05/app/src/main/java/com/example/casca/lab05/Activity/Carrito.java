@@ -79,7 +79,7 @@ public class Carrito extends AppCompatActivity {
             if (usr.getUsername().equals(username))
                 aux = usr;
         }
-        return aux;
+        return Data.usuario;
     }
 
     public int calculaTotal() {

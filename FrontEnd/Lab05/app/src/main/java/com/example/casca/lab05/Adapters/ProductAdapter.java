@@ -104,7 +104,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             if (usr.getUsername().equals(username))
                 aux = usr;
         }
-        return aux;
+        return Data.usuario;
     }
 
 }

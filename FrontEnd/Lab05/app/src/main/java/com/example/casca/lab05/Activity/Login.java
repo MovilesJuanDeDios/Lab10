@@ -231,19 +231,22 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
     private boolean isUsernameValid(String username) {
         //TODO: Replace this with your own logic
         for (Usuario element : Data.listaUsuarios) {
-            if(element.getUsername().equals(username))
+            if(element.getUsername().equals(username)){
+                Data.usuario = element;
+                Data.listaUsuarios.clear();
                 return true;
+            }
         }
         return false;
     }
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        for (Usuario usuario:Data.listaUsuarios) {
-            if(usuario.getClave().equals(password) && password.length() > 4)
-                return true;
-        }
-        return false;
+
+        if(Data.usuario.getClave().equals(password))
+            return true;
+        else
+            return false;
     }
 
     /**

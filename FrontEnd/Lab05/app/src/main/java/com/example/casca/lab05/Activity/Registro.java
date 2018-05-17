@@ -108,9 +108,8 @@ public class Registro extends AppCompatActivity {
             Data.listaUsuarios.add(us);
 
             JsonConnection conexion=new JsonConnection();
-            conexion.execute(new String[]{Data.url,"POST"});
-
-
+            String url=Data.url+"agregarUsuario&nombre="+nom+"&email="+mail+"&username="+usu+"&password="+passw+"&rol="+2;
+            conexion.execute(new String[]{url,"POST"});
 
             Toast.makeText(getApplicationContext(), "Registro exitoso", Toast.LENGTH_SHORT).show();
 

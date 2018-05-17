@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.casca.lab05.Adapters.ProductAdapter;
+import com.example.casca.lab05.ConnectionHelper.JsonConnection;
 import com.example.casca.lab05.Model.Product;
 import com.example.casca.lab05.Model.Usuario;
 import com.example.casca.lab05.R;
@@ -61,7 +62,6 @@ public class Navigation extends AppCompatActivity
         username = sharedPref.getString(getString(R.string.user_pref), getString(R.string.default_user));
 
         if (!added) {
-            addUsusarios();
             addProductos();
             added = true;
         }
@@ -75,17 +75,10 @@ public class Navigation extends AppCompatActivity
 
     }
 
-    private void addUsusarios(){
-        /* ************************ ROL 1 ES ROL DE USUARIO,
-         * ES EN CASO QUE DESPUES SE PIDAN OTROS ROLES
-         * COMO ADMINISTRADOR ETC
-         * ***************************************************/
-        Usuario user = new Usuario("andres","ancas@algo.com","andres","12345",1);
-        Usuario user2 = new Usuario("jose","joseslon@gmail.com","jose","12345",1);
-        Usuario user3 = new Usuario("giancarlo","juank@hotmail.com","giancarlo","12345",1);
-        Data.listaUsuarios.add(user);
-        Data.listaUsuarios.add(user2);
-        Data.listaUsuarios.add(user3);
+    private void addUsuarios(){
+        JsonConnection conexion=new JsonConnection();
+        String url=Data.url+"consultarUsuario";
+        conexion.execute(new String[]{url,"USER"});
     }
 
     private void addProductos() {
@@ -219,6 +212,7 @@ public class Navigation extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_login) {
+            addUsuarios();
             Intent intentf = new Intent(Navigation.this, Login.class);
             startActivity(intentf);
             finish();
@@ -226,6 +220,7 @@ public class Navigation extends AppCompatActivity
         } else {
             if (id == R.id.action_logout) {
                 SharedPreferences.Editor editor = sharedPref.edit();
+                Data.usuario = new Usuario();
                 editor.clear();
                 editor.commit();
                 finish();

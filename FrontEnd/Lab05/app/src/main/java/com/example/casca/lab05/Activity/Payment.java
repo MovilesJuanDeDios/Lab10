@@ -100,7 +100,7 @@ public class Payment extends AppCompatActivity {
             if (usr.getUsername().equals(username))
                 aux = usr;
         }
-        return aux;
+        return Data.usuario;
     }
 
     public void disminuyeInventario() {

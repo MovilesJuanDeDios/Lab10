@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.example.casca.lab05.Model.Product;
+import com.example.casca.lab05.Model.Usuario;
 import com.example.casca.lab05.Utils.Data;
 
 import org.json.JSONArray;
@@ -29,37 +30,53 @@ public class JsonConnection extends AsyncTask<String, String, List<Product>> {
         URL url;
         HttpURLConnection urlConnection = null;
         List<Product> productos= new ArrayList<>();
-
+        boolean get=false;
         try {
             if (params[1].equals("POST")) {
-                Log.v("Haciendo POST","Valeria");
+                Log.v("Haciendo POST","EN LA BASE");
                 url = new URL(params[0]);
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("POST");
-
+                Log.v("Haciendo POST",params[0]);
                 int responseCode = urlConnection.getResponseCode();
 
                 if(responseCode == HttpURLConnection.HTTP_OK){
-                    Log.v("CatalogClient-Response", "GUARDADO EN LA VALE");
+                    Log.v("CatalogClient-Response", "GUARDADO EN LA BASE");
                 }
             }
             else{
-                url = new URL(params[0]);
-                urlConnection = (HttpURLConnection) url.openConnection();
-                urlConnection.setRequestMethod("GET");
-                //HTTP header
-                //urlConnection.setRequestProperty("Authorization", "Bearer "+ token);
+                if(params[1].equals("USER")){
+                    url = new URL(params[0]);
+                    urlConnection = (HttpURLConnection) url.openConnection();
+                    urlConnection.setRequestMethod("GET");
 
-                int responseCode = urlConnection.getResponseCode();
-                String responseMessage = urlConnection.getResponseMessage();
+                    int responseCode = urlConnection.getResponseCode();
+                    String responseMessage = urlConnection.getResponseMessage();
 
-                if(responseCode == HttpURLConnection.HTTP_OK){
-                    String responseString = readStream(urlConnection.getInputStream());
-                    Log.v("CatalogClient-Response", responseString);
-                    productos = parseProductoData(responseString);
-                }else{
-                    Log.v("CatalogClient", "Response code:"+ responseCode);
-                    Log.v("CatalogClient", "Response message:"+ responseMessage);
+                    if (responseCode == HttpURLConnection.HTTP_OK) {
+                        String responseString = readStream(urlConnection.getInputStream());
+                        Log.v("CatalogClient-Response", responseString);
+                        get = parseUsuarioData(responseString);
+                    } else {
+                        Log.v("CatalogClient", "Response code:" + responseCode);
+                        Log.v("CatalogClient", "Response message:" + responseMessage);
+                    }
+                }else {
+                    url = new URL(params[0]);
+                    urlConnection = (HttpURLConnection) url.openConnection();
+                    urlConnection.setRequestMethod("GET");
+
+                    int responseCode = urlConnection.getResponseCode();
+                    String responseMessage = urlConnection.getResponseMessage();
+
+                    if (responseCode == HttpURLConnection.HTTP_OK) {
+                        String responseString = readStream(urlConnection.getInputStream());
+                        Log.v("CatalogClient-Response", responseString);
+                        productos = parseProductoData(responseString);
+                    } else {
+                        Log.v("CatalogClient", "Response code:" + responseCode);
+                        Log.v("CatalogClient", "Response message:" + responseMessage);
+                    }
                 }
             }
 
@@ -96,18 +113,38 @@ public class JsonConnection extends AsyncTask<String, String, List<Product>> {
         return response.toString();
     }
     /* --------------------------------------------------------------- */
+    private boolean parseUsuarioData(String jString){
+
+        try {
+            JSONArray items = new JSONArray(jString);
+            if(items != null) {
+                for (int i = 0; i < items.length(); i++) {
+                    String nombre=items.getJSONObject(i).getString("nombre");
+                    String email=items.getJSONObject(i).getString("email");
+                    String username=items.getJSONObject(i).getString("username");
+                    String clave=items.getJSONObject(i).getString("clave");
+                    int rol=items.getJSONObject(i).getInt("rol");
+
+                    //the value of progress is a placeholder here....
+                    Usuario usuario = new Usuario(nombre,email,username,clave,rol);
+                    Data.listaUsuarios.add(usuario);
+                    return true;
+                }
+            }
+
+            // }
+
+        } catch (JSONException e) {
+            Log.e("CatalogClient", "unexpected JSON exception", e);
+        }
+
+        return false;
+    }
+    /* --------------------------------------------------------------- */
     private List<Product> parseProductoData(String jString){
 
         List<Product> productoList = new ArrayList<Product>();
         try {
-            /*
-            JSONObject jObj = new JSONObject(jString);
-            String totalItems= jObj.getString("totalItems");
-            Log.v("totalItems",totalItems);
-            if (Integer.parseInt(totalItems) == 0) {
-                //((TextView) findViewById(R.id.JSON_value)).setText("You have no productos in this shelf");
-            } else {*/
-                //JSONArray items = jObj.getJSONArray("items");
                 JSONArray items = new JSONArray(jString);
                 if(items != null) {
                     for (int i = 0; i < items.length(); i++) {
