@@ -25,19 +25,17 @@
         </activity>
         <activity
             android:name=".Activity.Login"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".Activity.Payment"
             android:label="@string/title_activity_payment"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.Carrito"
             android:label="@string/title_activity_carrito"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".Activity.Registro">
-
-        </activity>
+            android:screenOrientation="portrait" />
+        <activity android:name=".Activity.Registro"></activity>
+        <activity android:name=".Activity.AgregarProducto"></activity>
     </application>
 
 </manifest>

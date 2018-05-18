@@ -14,7 +14,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.casca.lab05.Activity.AgregarProducto;
 import com.example.casca.lab05.Activity.Carrito;
+import com.example.casca.lab05.Activity.Navigation;
 import com.example.casca.lab05.Model.Product;
 import com.example.casca.lab05.Model.Usuario;
 import com.example.casca.lab05.R;
@@ -58,7 +60,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.cantidad.setText(String.valueOf(product.getCantidad()));
         holder.price.setText(String.valueOf(product.getPrice()));
 
-        holder.imageView.setImageDrawable(ctx.getResources().getDrawable(product.getImage()));
+        holder.imageView.setImageDrawable(ctx.getResources().getDrawable(R.drawable.dellinspiron));
+
+        if(Data.usuario.getRol() == 1)
+            holder.editar.setVisibility(View.VISIBLE);
 
         holder.carrito.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -73,6 +78,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                 }
             }
         });
+
+        holder.editar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ctx, AgregarProducto.class);
+                ctx.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -84,7 +97,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
         ImageView imageView;
         TextView title, desc, cantidad, price;
-        ImageButton carrito;
+        ImageButton carrito, editar;
 
         public ProductViewHolder(View itemView){
             super(itemView);
@@ -95,6 +108,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             cantidad = itemView.findViewById(R.id.textViewCantidad);
             price = itemView.findViewById(R.id.textViewPrice);
             carrito = itemView.findViewById(R.id.imageButtonCarrito);
+            editar = itemView.findViewById(R.id.imageButtonEditar);
         }
     }
 

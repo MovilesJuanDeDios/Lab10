@@ -59,6 +59,13 @@
     <string name="registrarse">Registrarse</string>
     <string name="cancelar">Cancelar</string>
 
+    <string name="id_producto_num">ID del Producto</string>
+    <string name="nombre_producto">Nombre del Producto</string>
+    <string name="desc_producto">Descripcion del Producto</string>
+    <string name="cant_producto">Cantidad</string>
+    <string name="precio_producto">Precio</string>
+    <string name="ingresar">Ingresar Producto</string>
+
 
     <string name="user_pref">usernameKey</string>
     <string name="preference_file_key">MyPrefs</string>

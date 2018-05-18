@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -14,6 +15,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,10 +41,12 @@ public class Navigation extends AppCompatActivity
 
     SharedPreferences sharedPref;
     String username;
+    int rol;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        addProductos();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -61,10 +65,6 @@ public class Navigation extends AppCompatActivity
         sharedPref = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         username = sharedPref.getString(getString(R.string.user_pref), getString(R.string.default_user));
 
-        if (!added) {
-            addProductos();
-            added = true;
-        }
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
@@ -72,6 +72,19 @@ public class Navigation extends AppCompatActivity
 
         adapter = new ProductAdapter(this, Data.listaProductos);
         recyclerView.setAdapter(adapter);
+
+        FloatingActionButton btnAgregar = (FloatingActionButton) findViewById(R.id.button_Agregar);
+
+        if(Data.usuario.getRol() == 1)
+            btnAgregar.setVisibility(View.VISIBLE);
+
+        btnAgregar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Navigation.this, AgregarProducto.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -81,89 +94,10 @@ public class Navigation extends AppCompatActivity
         conexion.execute(new String[]{url,"USER"});
     }
 
-    private void addProductos() {
-        Data.listaProductos.add(
-                new Product(
-                        1,
-                        "Apple MacBook Air Core i5 5th Gen - (8 GB/128 GB SSD/Mac OS Sierra)",
-                        "13.3 inch, Silver, 1.35 kg",
-                        24,
-                        525330,
-                        R.drawable.macbook));
-
-        Data.listaProductos.add(
-                new Product(
-                        2,
-                        "Dell Inspiron 7000 Core i5 7th Gen - (8 GB/1 TB HDD/Windows 10 Home)",
-                        "14 inch, Gray, 1.659 kg",
-                        13,
-                        381330,
-                        R.drawable.dellinspiron));
-
-        Data.listaProductos.add(
-                new Product(
-                        3,
-                        "Microsoft Surface Pro 4 Core m3 6th Gen - (4 GB/128 GB SSD/Windows 10)",
-                        "13.3 inch, Silver, 1.35 kg",
-                        10,
-                        342000,
-                        R.drawable.surface));
-        Data.listaProductos.add(
-                new Product(
-                        4,
-                        "Apple iPhone X",
-                        "Fully Unlocked 5.8\", 64GB - Silver",
-                        27,
-                        525000,
-                        R.drawable.iphone));
-        Data.listaProductos.add(
-                new Product(
-                        5,
-                        "Samsung Galaxy S9",
-                        "Unlocked Midnight Black 64GB",
-                        72,
-                        409000,
-                        R.drawable.samsung));
-        Data.listaProductos.add(
-                new Product(
-                        6,
-                        "Play Station 4",
-                        "Slim 500GB Console",
-                        37,
-                        153000,
-                        R.drawable.ps4));
-        Data.listaProductos.add(
-                new Product(
-                        7,
-                        "TCL 55S405",
-                        "55-Inch 4K Ultra HD Roku Smart LED TV (2017 Model)",
-                        18,
-                        228000,
-                        R.drawable.tcl));
-        Data.listaProductos.add(
-                new Product(
-                        8,
-                        "Sony MHC-V90W",
-                        "High Power One Box Party Music System with Built-In Wi-Fi (2017 model)",
-                        30,
-                        740500,
-                        R.drawable.sony));
-        Data.listaProductos.add(
-                new Product(
-                        9,
-                        "Stacy Talented Superhero Ninja Name Pride Funny Gift",
-                        "Phone Case Fits Iphone 6, 6s, 7, 8",
-                        69,
-                        7500,
-                        R.drawable.stacy));
-        Data.listaProductos.add(
-                new Product(
-                        10,
-                        "LG Electronics OLED65C8PUA",
-                        "65-Inch 4K Ultra HD Smart OLED TV (2018 Model)",
-                        100,
-                        2000000,
-                        R.drawable.lg));
+    private void addProductos(){
+        JsonConnection conexion=new JsonConnection();
+        String url=Data.url+"consultarProductos";
+        conexion.execute(new String[]{url,"PRODUCT"});
     }
 
 

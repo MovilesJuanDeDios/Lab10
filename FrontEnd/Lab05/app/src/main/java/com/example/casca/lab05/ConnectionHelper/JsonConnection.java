@@ -72,7 +72,7 @@ public class JsonConnection extends AsyncTask<String, String, List<Product>> {
                     if (responseCode == HttpURLConnection.HTTP_OK) {
                         String responseString = readStream(urlConnection.getInputStream());
                         Log.v("CatalogClient-Response", responseString);
-                        productos = parseProductoData(responseString);
+                        get = parseProductoData(responseString);
                     } else {
                         Log.v("CatalogClient", "Response code:" + responseCode);
                         Log.v("CatalogClient", "Response message:" + responseMessage);
@@ -128,8 +128,8 @@ public class JsonConnection extends AsyncTask<String, String, List<Product>> {
                     //the value of progress is a placeholder here....
                     Usuario usuario = new Usuario(nombre,email,username,clave,rol);
                     Data.listaUsuarios.add(usuario);
-                    return true;
                 }
+                return true;
             }
 
             // }
@@ -141,22 +141,20 @@ public class JsonConnection extends AsyncTask<String, String, List<Product>> {
         return false;
     }
     /* --------------------------------------------------------------- */
-    private List<Product> parseProductoData(String jString){
-
-        List<Product> productoList = new ArrayList<Product>();
+    private boolean parseProductoData(String jString){
         try {
                 JSONArray items = new JSONArray(jString);
                 if(items != null) {
                     for (int i = 0; i < items.length(); i++) {
-                        String codigo = items.getJSONObject(i).getString("codigo");
-                        String nombreProducto = items.getJSONObject(i).getString("nombreProducto");
-                        Double precio = items.getJSONObject(i).getDouble("precio");
-                        int importado = items.getJSONObject(i).getInt("importado");
-                        String nombreTipo = items.getJSONObject(i).getString("tipo");
+                        int codigo = items.getJSONObject(i).getInt("id");
+                        String nombreProducto = items.getJSONObject(i).getString("title");
+                        String descProducto = items.getJSONObject(i).getString("shortdesc");
+                        int cantidad = items.getJSONObject(i).getInt("cantidad");
+                        int precio = items.getJSONObject(i).getInt("price");
+
                         //the value of progress is a placeholder here....
-                        Product producto = new Product();
+                        Product producto = new Product(codigo,nombreProducto,descProducto,cantidad,precio,0);
                         Data.listaProductos.add(producto);
-                        productoList.add(producto);
                     }
                 }
 
@@ -166,7 +164,7 @@ public class JsonConnection extends AsyncTask<String, String, List<Product>> {
             Log.e("CatalogClient", "unexpected JSON exception", e);
         }
 
-        return productoList;
+        return false;
     }
     /* --------------------------------------------------------------- */
     protected void onPostExecute(List<Product> productos) {

@@ -3,10 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/casca/Documents/GitHub/Lab10/BackEnd/SistemaRecomendacion/src/LogicaNegocio/Usuario.java</file>
-            <file>file:/C:/Users/casca/Documents/GitHub/Lab10/BackEnd/SistemaRecomendacion/src/AccesoDatos/Servicio.java</file>
-            <file>file:/C:/Users/casca/Documents/GitHub/Lab10/BackEnd/SistemaRecomendacion/src/GestorBD/ScriptDB.sql</file>
-            <file>file:/C:/Users/casca/Documents/GitHub/Lab10/BackEnd/SistemaRecomendacion/src/AccesoDatos/ServicioUsuario.java</file>
+            <file>file:/C:/Users/Giancarlo/Documents/GitHub/Lab10/BackEnd/SistemaRecomendacion/src/LogicaNegocio/Product.java</file>
+            <file>file:/C:/Users/Giancarlo/Documents/GitHub/Lab10/BackEnd/SistemaRecomendacion/src/GestorBD/ScriptDB.sql</file>
         </group>
     </open-files>
 </project-private>

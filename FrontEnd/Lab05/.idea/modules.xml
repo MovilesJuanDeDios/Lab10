@@ -3,10 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Lab05.iml" filepath="$PROJECT_DIR$/Lab05.iml" />
-      <module fileurl="file://C:\Users\casca\Documents\GitHub\Lab05\Lab05\Lab05.iml" filepath="C:\Users\casca\Documents\GitHub\Lab05\Lab05\Lab05.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\Users\casca\Documents\GitHub\Lab05\Lab05\app\app.iml" filepath="C:\Users\casca\Documents\GitHub\Lab05\Lab05\app\app.iml" />
-      <module fileurl="file://C:\Users\LENOVO\Desktop\Lab10-master\Lab10-master\FrontEnd\Lab05\app\app.iml" filepath="C:\Users\LENOVO\Desktop\Lab10-master\Lab10-master\FrontEnd\Lab05\app\app.iml" />
     </modules>
   </component>
 </project>

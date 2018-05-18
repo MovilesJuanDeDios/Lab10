@@ -100,11 +100,12 @@ public class Servlet extends HttpServlet {
                 /* --------------------------------------------------------------------------------------- */
                     
                 case "agregarProducto":
-                          /*p.setCodigo(request.getParameter("codigo"));
-                          p.setNombreProducto(request.getParameter("nombre"));
-                          p.setPrecio(Double.parseDouble(request.getParameter("precio")));
-                          p.setImportado(Integer.parseInt(request.getParameter("importado")));
-                          p.setTipo(request.getParameter("tipo")); */
+                          p.setId(Integer.parseInt(request.getParameter("id")));
+                          p.setTitle(request.getParameter("nombre"));
+                          p.setShortdesc(request.getParameter("shortdesc"));
+                          p.setCantidad(Integer.parseInt(request.getParameter("cant")));
+                          p.setPrice(Integer.parseInt(request.getParameter("precio")));
+                          p.setImage(0);
                           
                           sp.insertarProducto(p);
 
@@ -112,11 +113,12 @@ public class Servlet extends HttpServlet {
                           break;
 
                 case "setProducto":
-                        /*p.setCodigo(request.getParameter("codigo"));
-                        p.setNombreProducto(request.getParameter("nombre"));
-                        p.setPrecio(Double.parseDouble(request.getParameter("precio")));
-                        p.setImportado(Integer.parseInt(request.getParameter("importado")));
-                        p.setTipo(request.getParameter("tipo")); */
+                        p.setId(Integer.parseInt(request.getParameter("id")));
+                        p.setTitle(request.getParameter("nombre"));
+                        p.setShortdesc(request.getParameter("shortdesc"));
+                        p.setCantidad(Integer.parseInt(request.getParameter("cant")));
+                        p.setPrice(Integer.parseInt(request.getParameter("precio")));
+                        p.setImage(0);
 
                         sp.actualizarProducto(p);
 

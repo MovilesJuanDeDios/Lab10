@@ -15,6 +15,15 @@
             android:layout_height="wrap_content"
             android:padding="8dp">
 
+            <ImageButton
+                android:id="@+id/imageButtonEditar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewShortDesc"
+                android:layout_toStartOf="@+id/imageButtonCarrito"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/ic_menu_manage" />
+
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="120dp"
