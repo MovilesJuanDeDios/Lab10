@@ -66,9 +66,6 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
     private View mProgressView;
     private View mLoginFormView;
 
-    private SharedPreferences sharedpreferences;
-
-    /* *************************** LISTA DE USUARIOS QUEMADO EN EL APP  *************************** */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,7 +105,7 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
 
-        sharedpreferences = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+
      }
 
     private void populateAutoComplete() {
@@ -214,11 +211,7 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
 
-            String un  = usernameView.getText().toString();
-            SharedPreferences.Editor editor = sharedpreferences.edit();
-            editor.putString(getString(R.string.user_pref), un);
-            editor.commit();
-
+            Data.listaUsuarios.clear();
             showProgress(true);
             mAuthTask = new UserLoginTask(usuario, password);
             mAuthTask.execute((Void) null);
@@ -230,10 +223,10 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
 
     private boolean isUsernameValid(String username) {
         //TODO: Replace this with your own logic
+
         for (Usuario element : Data.listaUsuarios) {
             if(element.getUsername().equals(username)){
                 Data.usuario = element;
-                Data.listaUsuarios.clear();
                 return true;
             }
         }

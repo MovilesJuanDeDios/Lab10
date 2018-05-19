@@ -95,6 +95,16 @@
                 android:layout_below="@+id/textViewShortDesc"
                 android:text="Cantidad" />
 
+            <ImageButton
+                android:id="@+id/imageButtonDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@+id/imageButtonCarrito"
+                android:visibility="invisible"
+                app:srcCompat="@android:drawable/ic_menu_delete" />
+
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>

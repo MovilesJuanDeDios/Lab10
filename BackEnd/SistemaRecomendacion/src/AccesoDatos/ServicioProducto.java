@@ -19,7 +19,7 @@ public class ServicioProducto extends Servicio {
     private static final String ACTUALIZARPRODUCTO = "{call actualizarProduct(?,?,?,?,?,?)}";
     private static final String BUSCARPRODUCTO = "{?=call buscarProduct(?)}";
     private static final String LISTARPRODUCTO = "{?=call listarProduct()}";
-    private static final String ELIMINARPRODUCTO = "{call eliminarProducto(?)}";
+    private static final String ELIMINARPRODUCTO = "{call eliminarProduct(?)}";
     private static final String TOTALPAGAR = "{?=call totalPagar(?,?)}";
 
     public ServicioProducto() {

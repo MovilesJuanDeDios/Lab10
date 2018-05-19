@@ -133,7 +133,7 @@ public class Servlet extends HttpServlet {
                     break;
 
                 case "deleteProducto":
-                    int prod = Integer.parseInt(request.getParameter("nombre"));
+                    int prod = Integer.parseInt(request.getParameter("codigo"));
                     sp.eliminarProducto(prod);
                     out.print("C~El objeto fue eliminado correctamente");
                     break;

@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.casca.lab05.ConnectionHelper.JsonConnection;
+import com.example.casca.lab05.Model.Product;
 import com.example.casca.lab05.Model.Usuario;
 import com.example.casca.lab05.R;
 import com.example.casca.lab05.Utils.Data;
@@ -107,17 +108,14 @@ public class AgregarProducto extends AppCompatActivity {
             // form field with an error.
             focusView.requestFocus();
         } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
-            //Usuario us = new Usuario(nom, mail, usu, passw, 1);
-            //Data.listaUsuarios.add(us);
+            Product pro = new Product(Integer.parseInt(iden),nom,desc,Integer.parseInt(cant),Integer.parseInt(prec),0);
 
             JsonConnection conexion=new JsonConnection();
             String url=Data.url+"agregarProducto&id="+iden+"&nombre="+nom+"&shortdesc="+desc+"&cant="+cant+"&precio="+prec;
             conexion.execute(new String[]{url,"POST"});
 
             Toast.makeText(getApplicationContext(), "Registro exitoso", Toast.LENGTH_SHORT).show();
-
+            Data.listaProductos.add(pro);
             Intent intentf = new Intent(this,Navigation.class);
             startActivity(intentf);
             finish();

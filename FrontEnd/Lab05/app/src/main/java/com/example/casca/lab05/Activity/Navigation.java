@@ -39,14 +39,12 @@ public class Navigation extends AppCompatActivity
 
     TextView userTextView;
 
-    SharedPreferences sharedPref;
     String username;
     int rol;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        addProductos();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -62,8 +60,7 @@ public class Navigation extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         userTextView = (TextView) findViewById(R.id.user_logged);
-        sharedPref = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        username = sharedPref.getString(getString(R.string.user_pref), getString(R.string.default_user));
+        username = Data.usuario.getUsername();
 
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
@@ -89,16 +86,13 @@ public class Navigation extends AppCompatActivity
     }
 
     private void addUsuarios(){
+        Data.listaUsuarios.clear();
         JsonConnection conexion=new JsonConnection();
         String url=Data.url+"consultarUsuario";
         conexion.execute(new String[]{url,"USER"});
     }
 
-    private void addProductos(){
-        JsonConnection conexion=new JsonConnection();
-        String url=Data.url+"consultarProductos";
-        conexion.execute(new String[]{url,"PRODUCT"});
-    }
+
 
 
     @Override
@@ -125,6 +119,7 @@ public class Navigation extends AppCompatActivity
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
+
         if (!username.equals("")) {
             TextView textView = (TextView) findViewById(R.id.user_logged);
             textView.setText(username);
@@ -153,11 +148,7 @@ public class Navigation extends AppCompatActivity
             return true;
         } else {
             if (id == R.id.action_logout) {
-                SharedPreferences.Editor editor = sharedPref.edit();
-                Data.usuario = new Usuario();
-                editor.clear();
-                editor.commit();
-                finish();
+                Data.usuario = new Usuario("","","","",0);
                 startActivity(getIntent());
                 finish();
             }
@@ -174,8 +165,26 @@ public class Navigation extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.carrito) {
-            Intent intentf = new Intent(Navigation.this, Carrito.class);
-            startActivity(intentf);
+            if(Data.usuario.getRol()==0){
+                Toast.makeText(this, "Inicie Sesion", Toast.LENGTH_SHORT).show();
+            }
+            if(Data.usuario.getRol()==1){
+                Toast.makeText(this, "Inicie Sesion Como Cliente", Toast.LENGTH_SHORT).show();
+            }
+
+            if(Data.usuario.getRol()==2){
+                Intent intentf = new Intent(Navigation.this, Carrito.class);
+                startActivity(intentf);
+            }
+        }
+        if (id == R.id.perfil) {
+            if(Data.usuario.getRol()==0){
+                Toast.makeText(this, "Inicie Sesion", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                Intent intentf = new Intent(Navigation.this, Registro.class);
+                startActivity(intentf);
+            }
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

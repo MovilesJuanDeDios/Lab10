@@ -24,7 +24,6 @@ public class Payment extends AppCompatActivity {
 
     private Button button;
 
-    private SharedPreferences sharedPref;
     String username;
 
 
@@ -80,8 +79,8 @@ public class Payment extends AppCompatActivity {
             }
         });
 
-        sharedPref = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        username = sharedPref.getString(getString(R.string.user_pref), getString(R.string.default_user));
+
+        username = Data.usuario.getUsername();
 
         TextView monto = findViewById(R.id.textViewMontoP);
         monto.setText(Integer.toString(calculaTotal()));

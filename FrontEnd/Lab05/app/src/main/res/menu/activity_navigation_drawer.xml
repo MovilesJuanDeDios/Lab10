@@ -9,8 +9,12 @@
                 android:id="@+id/carrito"
                 android:icon="@drawable/ic_shopping"
                 android:title="Carrito" />
-
+            <item
+                android:id="@+id/perfil"
+                android:icon="@drawable/ic_person_black"
+                android:title="Editar Perfil" />
         </menu>
     </item>
+
 
 </menu>

@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.casca.lab05.Activity.AgregarProducto;
 import com.example.casca.lab05.Activity.Carrito;
 import com.example.casca.lab05.Activity.Navigation;
+import com.example.casca.lab05.ConnectionHelper.JsonConnection;
 import com.example.casca.lab05.Model.Product;
 import com.example.casca.lab05.Model.Usuario;
 import com.example.casca.lab05.R;
@@ -33,7 +34,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     private Context ctx;
     private List<Product> productList;
 
-    private SharedPreferences sharedPref;
     private String username;
 
     public ProductAdapter(Context ctx, List<Product> productList) {
@@ -62,13 +62,15 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
         holder.imageView.setImageDrawable(ctx.getResources().getDrawable(R.drawable.dellinspiron));
 
-        if(Data.usuario.getRol() == 1)
+        if(Data.usuario.getRol() == 1){
+            holder.carrito.setVisibility(View.INVISIBLE);
             holder.editar.setVisibility(View.VISIBLE);
+            holder.delete.setVisibility(View.VISIBLE);
+        }
 
         holder.carrito.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                sharedPref = ctx.getSharedPreferences(ctx.getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-                username = sharedPref.getString(ctx.getString(R.string.user_pref), ctx.getString(R.string.default_user));
+                username = Data.usuario.getUsername();
 
                 if (username.equals("")) {
                     Toast.makeText(ctx.getApplicationContext(), "Debe iniciar sesion primero", Toast.LENGTH_SHORT).show();
@@ -86,6 +88,19 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                 ctx.startActivity(intent);
             }
         });
+
+        holder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Product prod =Data.listaProductos.get(position);
+                Data.listaProductos.remove(position);
+                notifyItemRemoved(position);
+
+                JsonConnection conexion=new JsonConnection();
+                String url=Data.url+"deleteProducto&codigo="+prod.getId();
+                conexion.execute(new String[]{url,"POST"});
+            }
+        });
     }
 
     @Override
@@ -97,7 +112,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
         ImageView imageView;
         TextView title, desc, cantidad, price;
-        ImageButton carrito, editar;
+        ImageButton carrito, editar, delete;
 
         public ProductViewHolder(View itemView){
             super(itemView);
@@ -109,6 +124,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             price = itemView.findViewById(R.id.textViewPrice);
             carrito = itemView.findViewById(R.id.imageButtonCarrito);
             editar = itemView.findViewById(R.id.imageButtonEditar);
+            delete = itemView.findViewById(R.id.imageButtonDelete);
         }
     }
 

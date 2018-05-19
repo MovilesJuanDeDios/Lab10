@@ -29,7 +29,6 @@ public class Carrito extends AppCompatActivity {
 
     private Button button;
 
-    private SharedPreferences sharedPref;
     private String username;
 
     private TextView tv;
@@ -45,8 +44,8 @@ public class Carrito extends AppCompatActivity {
 
         button = (Button) findViewById(R.id.comprar);
 
-        sharedPref = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        username = sharedPref.getString(getString(R.string.user_pref), getString(R.string.default_user));
+
+        username = Data.usuario.getUsername();
 
         tv = (TextView) findViewById(R.id.textViewMonto);
 
