@@ -6,9 +6,9 @@ import java.util.List;
 
 public class Usuario implements Serializable {
 
+    private String username;
     private String nombre;
     private String email;
-    private String username;
     private String clave;
     private int rol;
     List<Product> listaProductos;
@@ -16,10 +16,10 @@ public class Usuario implements Serializable {
     public Usuario() {
     }
 
-    public Usuario(String nombre, String email, String username, String clave, int rol) {
+    public Usuario(String username, String nombre, String email, String clave, int rol) {
+        this.username = username;
         this.nombre = nombre;
         this.email = email;
-        this.username = username;
         this.clave = clave;
         this.rol = rol;
         listaProductos = new ArrayList<>();

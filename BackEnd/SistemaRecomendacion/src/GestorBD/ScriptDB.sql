@@ -38,10 +38,10 @@ END;
 /
 
 -- ----------------- ACTUALIZAR USUARIO ----------------- 
-CREATE OR REPLACE PROCEDURE actualizarUsuario(usernamein IN Usuario.username%TYPE, nombrein IN Usuario.nombre%TYPE, emailin IN Usuario.email%TYPE,clavein IN Usuario.clave%TYPE, rolin IN Usuario.rol%TYPE)
+CREATE OR REPLACE PROCEDURE actualizarUsuario(usernamein IN Usuario.username%TYPE, nombrein IN Usuario.nombre%TYPE, emailin IN Usuario.email%TYPE,clavein IN Usuario.clave%TYPE)
 AS
 BEGIN
-	UPDATE Usuario SET nombre=nombrein,email=emailin,clave=clavein,rol=rolin WHERE username=usernamein;
+	UPDATE Usuario SET nombre=nombrein,email=emailin,clave=clavein WHERE username=usernamein;
 END;
 /
 
@@ -98,10 +98,10 @@ END;
 /
 
 -- ----------------- ACTUALIZAR PRODUCTO ----------------- 
-CREATE OR REPLACE PROCEDURE actualizarProduct(idin IN Product.id%TYPE, titlein IN Product.title%TYPE, shortdescin IN Product.shortdesc%TYPE,cantidadin IN Product.cantidad%TYPE, pricein IN Product.price%TYPE, imagein IN Product.image%TYPE)
+CREATE OR REPLACE PROCEDURE actualizarProduct(idin IN Product.id%TYPE, titlein IN Product.title%TYPE, shortdescin IN Product.shortdesc%TYPE,cantidadin IN Product.cantidad%TYPE, pricein IN Product.price%TYPE)
 AS
 BEGIN
-	UPDATE Product SET title=titlein,shortdesc=shortdescin,cantidad=cantidadin,price=pricein,image=imagein WHERE id=idin;
+	UPDATE Product SET title=titlein,shortdesc=shortdescin,cantidad=cantidadin,price=pricein WHERE id=idin;
 END;
 /
 

@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,8 +60,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.desc.setText(product.getShortdesc());
         holder.cantidad.setText(String.valueOf(product.getCantidad()));
         holder.price.setText(String.valueOf(product.getPrice()));
-
-        holder.imageView.setImageDrawable(ctx.getResources().getDrawable(R.drawable.dellinspiron));
+        int v=product.getImage();
+        holder.imageView.setImageDrawable(ctx.getResources().getDrawable(v));
+        //holder.imageView.setImageDrawable(ctx.getResources().getDrawable(R.drawable.dellinspiron));
 
         if(Data.usuario.getRol() == 1){
             holder.carrito.setVisibility(View.INVISIBLE);
@@ -85,6 +87,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ctx, AgregarProducto.class);
+                intent.putExtra("edit", true);
+                intent.putExtra("position", position);
                 ctx.startActivity(intent);
             }
         });
@@ -92,6 +96,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Product prod =Data.listaProductos.get(position);
                 Data.listaProductos.remove(position);
                 notifyItemRemoved(position);

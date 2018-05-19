@@ -16,7 +16,7 @@ import oracle.jdbc.internal.OracleTypes;
 public class ServicioUsuario extends Servicio {
 
     private static final String INSERTAUSUARIO = "{call insertarUsuario(?,?,?,?,?)}";
-    private static final String ACTUALIZARUSUARIO = "{call actualizarUsuario(?,?,?,?,?)}";
+    private static final String ACTUALIZARUSUARIO = "{call actualizarUsuario(?,?,?,?)}";
     private static final String BUSCARUSUARIO = "{?=call buscarUsuario(?)}";
     private static final String LISTARUSUARIO = "{?=call listarUsuario()}";
     private static final String ELIMINARUSUARIO = "{call eliminarUsuario(?)}";
@@ -69,7 +69,6 @@ public class ServicioUsuario extends Servicio {
             pstmt.setString(2, usuario.getNombre());
             pstmt.setString(3, usuario.getEmail());
             pstmt.setString(4, usuario.getClave());
-            pstmt.setInt(5, usuario.getRol());
             boolean resultado = pstmt.execute();
 
             if (resultado == true) {

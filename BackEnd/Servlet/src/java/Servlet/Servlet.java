@@ -61,9 +61,9 @@ public class Servlet extends HttpServlet {
             List<Double> listaCalculo = new ArrayList();
             switch (accion) {
                 case "agregarUsuario":
+                          u.setUsername(request.getParameter("username"));
                           u.setNombre(request.getParameter("nombre"));
                           u.setEmail(request.getParameter("email"));
-                          u.setUsername(request.getParameter("username"));
                           u.setClave(request.getParameter("password")); 
                           u.setRol(Integer.parseInt(request.getParameter("rol"))); 
                           
@@ -73,11 +73,10 @@ public class Servlet extends HttpServlet {
                           break;
 
                 case "setUsuario":
+                        u.setUsername(request.getParameter("username"));
                         u.setNombre(request.getParameter("nombre"));
                         u.setEmail(request.getParameter("email"));
-                        u.setUsername(request.getParameter("username"));
                         u.setClave(request.getParameter("password")); 
-                        u.setRol(Integer.parseInt(request.getParameter("rol"))); 
 
                         su.actualizarUsuario(u);
 
@@ -86,7 +85,7 @@ public class Servlet extends HttpServlet {
 
                 case "consultarUsuario":
 
-                    List<Product> list = new ArrayList(su.listarUsuario());
+                    List<Usuario> list = new ArrayList(su.listarUsuario());
                     json = new Gson().toJson(list);    
                     out.print(json);
                     break;
@@ -105,7 +104,7 @@ public class Servlet extends HttpServlet {
                           p.setShortdesc(request.getParameter("shortdesc"));
                           p.setCantidad(Integer.parseInt(request.getParameter("cant")));
                           p.setPrice(Integer.parseInt(request.getParameter("precio")));
-                          p.setImage(0);
+                          p.setImage(Integer.parseInt(request.getParameter("imagen")));
                           
                           sp.insertarProducto(p);
 
@@ -118,7 +117,6 @@ public class Servlet extends HttpServlet {
                         p.setShortdesc(request.getParameter("shortdesc"));
                         p.setCantidad(Integer.parseInt(request.getParameter("cant")));
                         p.setPrice(Integer.parseInt(request.getParameter("precio")));
-                        p.setImage(0);
 
                         sp.actualizarProducto(p);
 

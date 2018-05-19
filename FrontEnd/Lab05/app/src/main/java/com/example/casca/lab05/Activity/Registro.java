@@ -33,9 +33,9 @@ public class Registro extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
 
+        usuario =(EditText) findViewById(R.id.register_username);
         nombre = (EditText) findViewById(R.id.register_nombre);
         email = (EditText) findViewById(R.id.register_email);
-        usuario =(EditText) findViewById(R.id.register_username);
         pass = (EditText) findViewById(R.id.register_password);
         passConf = (EditText) findViewById(R.id.register_password_confirm);
 
@@ -55,6 +55,9 @@ public class Registro extends AppCompatActivity {
             }
         });
 
+        if(getIntent().getBooleanExtra("edit",false)==true)
+            editData();
+
     }
 
     private void attemptRegister() {
@@ -63,16 +66,16 @@ public class Registro extends AppCompatActivity {
         }
 
         // Reset errors.
+        usuario.setError(null);
         nombre.setError(null);
         email.setError(null);
-        usuario.setError(null);
         pass.setError(null);
         passConf.setError(null);
 
         // Store values at the time of the login attempt.
+        String usu = usuario.getText().toString();
         String nom = nombre.getText().toString();
         String mail = email.getText().toString();
-        String usu = usuario.getText().toString();
         String passw = pass.getText().toString();
         String passwConf = passConf.getText().toString();
 
@@ -93,22 +96,33 @@ public class Registro extends AppCompatActivity {
             cancel = true;
         }
 
-
-        // faltan mas validaciones
-
+        if (!isUsernameValid(usu)) {
+            usuario.setError(getString(R.string.error_invalid_username));
+            focusView = usuario;
+            cancel = true;
+        }
 
         if (cancel) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
             focusView.requestFocus();
         } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
-            Usuario us = new Usuario(nom, mail, usu, passw, 1);
-            Data.listaUsuarios.add(us);
+            Usuario us = new Usuario(usu,nom,mail,passw,1);
+            String url;
+            JsonConnection conexion = new JsonConnection();
 
-            JsonConnection conexion=new JsonConnection();
-            String url=Data.url+"agregarUsuario&nombre="+nom+"&email="+mail+"&username="+usu+"&password="+passw+"&rol="+2;
+            if(getIntent().getBooleanExtra("edit",false)==true){
+                Data.usuario.setUsername(usu);
+                Data.usuario.setNombre(nom);
+                Data.usuario.setEmail(mail);
+                Data.usuario.setClave(passw);
+                url=Data.url+"setUsuario&username="+usu+"&nombre="+nom+"&email="+mail+"&password="+passw;
+            }
+            else{
+                Data.listaUsuarios.add(us);
+                url=Data.url+"agregarUsuario&username="+usu+"&nombre="+nom+"&email="+mail+"&password="+passw+"&rol="+2;
+            }
+
             conexion.execute(new String[]{url,"POST"});
 
             Toast.makeText(getApplicationContext(), "Registro exitoso", Toast.LENGTH_SHORT).show();
@@ -137,18 +151,21 @@ public class Registro extends AppCompatActivity {
         return true;
     }
 
-    // revisa que el password sea mayor a 4 caracteres
-    private boolean isPasswordValid(String password) {
-        for (Usuario usuario:Data.listaUsuarios) {
-            if (password.length() < 4)
-                return false;
-        }
-        return true;
-    }
 
     private void cancelar() {
         Intent intentf = new Intent(Registro.this,Navigation.class);
         startActivity(intentf);
         finish();
+    }
+
+    public void editData() {
+
+        ((EditText) findViewById(R.id.register_nombre)).setText(Data.usuario.getNombre());
+        ((EditText) findViewById(R.id.register_email)).setText(Data.usuario.getEmail());
+        ((EditText) findViewById(R.id.register_username)).setText(Data.usuario.getUsername());
+        (findViewById(R.id.register_username)).setEnabled(false);
+        ((EditText) findViewById(R.id.register_password)).setText(Data.usuario.getClave());
+        ((EditText) findViewById(R.id.register_password_confirm)).setText(Data.usuario.getClave());
+
     }
 }

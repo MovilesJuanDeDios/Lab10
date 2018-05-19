@@ -49,8 +49,9 @@ public class CarritoAdapter extends RecyclerView.Adapter<CarritoAdapter.ProductV
         holder.title.setText(product.getTitle());
         holder.desc.setText(product.getShortdesc());
         holder.price.setText(String.valueOf(product.getPrice()));
-
-        holder.imageView.setImageDrawable(ctx.getResources().getDrawable(R.drawable.dellinspiron));
+        int v=product.getImage();
+        holder.imageView.setImageDrawable(ctx.getResources().getDrawable(v));
+        //holder.imageView.setImageDrawable(ctx.getResources().getDrawable(R.drawable.dellinspiron));
 
         final Product prodData = productList.get(position);
 

@@ -119,14 +119,14 @@ public class JsonConnection extends AsyncTask<String, String, List<Product>> {
             JSONArray items = new JSONArray(jString);
             if(items != null) {
                 for (int i = 0; i < items.length(); i++) {
+                    String username=items.getJSONObject(i).getString("username");
                     String nombre=items.getJSONObject(i).getString("nombre");
                     String email=items.getJSONObject(i).getString("email");
-                    String username=items.getJSONObject(i).getString("username");
                     String clave=items.getJSONObject(i).getString("clave");
                     int rol=items.getJSONObject(i).getInt("rol");
 
                     //the value of progress is a placeholder here....
-                    Usuario usuario = new Usuario(nombre,email,username,clave,rol);
+                    Usuario usuario = new Usuario(username,nombre,email,clave,rol);
                     Data.listaUsuarios.add(usuario);
                 }
                 return true;
@@ -151,9 +151,10 @@ public class JsonConnection extends AsyncTask<String, String, List<Product>> {
                         String descProducto = items.getJSONObject(i).getString("shortdesc");
                         int cantidad = items.getJSONObject(i).getInt("cantidad");
                         int precio = items.getJSONObject(i).getInt("price");
+                        int image = items.getJSONObject(i).getInt("image");
 
                         //the value of progress is a placeholder here....
-                        Product producto = new Product(codigo,nombreProducto,descProducto,cantidad,precio,0);
+                        Product producto = new Product(codigo,nombreProducto,descProducto,cantidad,precio,image);
                         Data.listaProductos.add(producto);
                     }
                 }

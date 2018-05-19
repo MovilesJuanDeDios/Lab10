@@ -56,7 +56,7 @@
     <string name="nombre_usuario">Nombre Completo</string>
     <string name="email_usuario">Email</string>
     <string name="confirm_password">Confirmar Contraseña</string>
-    <string name="registrarse">Registrarse</string>
+    <string name="registrarse">Aceptar</string>
     <string name="cancelar">Cancelar</string>
 
     <string name="id_producto_num">ID del Producto</string>

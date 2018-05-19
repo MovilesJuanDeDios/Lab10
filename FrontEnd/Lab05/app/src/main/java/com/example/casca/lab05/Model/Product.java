@@ -48,6 +48,22 @@ public class Product {
     public int getImage() {
         return image;
     }
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setShortdesc(String shortdesc) {
+        this.shortdesc = shortdesc;
+    }
+
+    public void setImage(int image) {
+        this.image = image;
+    }
+
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;

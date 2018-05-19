@@ -93,8 +93,6 @@ public class Navigation extends AppCompatActivity
     }
 
 
-
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -183,6 +181,7 @@ public class Navigation extends AppCompatActivity
             }
             else{
                 Intent intentf = new Intent(Navigation.this, Registro.class);
+                intentf.putExtra("edit", true);
                 startActivity(intentf);
             }
         }

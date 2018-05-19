@@ -16,7 +16,7 @@ import oracle.jdbc.internal.OracleTypes;
 public class ServicioProducto extends Servicio {
 
     private static final String INSERTAPRODUCTO = "{call insertarProduct(?,?,?,?,?,?)}";
-    private static final String ACTUALIZARPRODUCTO = "{call actualizarProduct(?,?,?,?,?,?)}";
+    private static final String ACTUALIZARPRODUCTO = "{call actualizarProduct(?,?,?,?,?)}";
     private static final String BUSCARPRODUCTO = "{?=call buscarProduct(?)}";
     private static final String LISTARPRODUCTO = "{?=call listarProduct()}";
     private static final String ELIMINARPRODUCTO = "{call eliminarProduct(?)}";
@@ -72,7 +72,6 @@ public class ServicioProducto extends Servicio {
             pstmt.setString(3, producto.getShortdesc());
             pstmt.setInt(4, producto.getCantidad());
             pstmt.setInt(5, producto.getPrice());
-            pstmt.setInt(6, producto.getImage());
             
             boolean resultado = pstmt.execute();
 
