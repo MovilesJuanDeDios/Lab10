@@ -13,17 +13,18 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.casca.lab05.ConnectionHelper.JsonConnection;
 import com.example.casca.lab05.Model.Product;
 import com.example.casca.lab05.Model.Usuario;
 import com.example.casca.lab05.R;
 import com.example.casca.lab05.Utils.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Payment extends AppCompatActivity {
 
     private Button button;
-
     String username;
 
 
@@ -88,6 +89,14 @@ public class Payment extends AppCompatActivity {
 
     public void finalizarCompra() {
         getUsuario(username).getListaProductos().clear();
+
+        for(Product p : Data.listaProductos) {
+            JsonConnection conexion= new JsonConnection();
+            String url;
+            url=Data.url+"setProducto&id="+p.getId()+"&nombre="+p.getTitle()+"&shortdesc="+p.getShortdesc()+"&cant="+p.getCantidad()+"&precio="+p.getPrice();
+            conexion.execute(new String[]{url,"POST"});
+        }
+
         Intent intentf = new Intent(Payment.this,Navigation.class);
         startActivity(intentf);
         finish();
